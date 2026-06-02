@@ -1,7 +1,6 @@
 {
-  "buildCommand": "pip install -r requirements.txt && echo 'Build complete'",
-  "framework": "django",
-  "python": {
-    "version": "3.11"
+  "buildCommand": "pip install -r requirements.txt",
+  "env": {
+    "DISABLE_COLLECTSTATIC": "1"
   }
 }
