@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Shopping Cart{% endblock %}
+
+{% block content %}
+<div style="padding: 20px 0;">
+    <h1>Shopping Cart</h1>
+    {% if order.items.count > 0 %}
+    <div style="margin-top: 20px;">
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.items.all %}
+                <tr>
+                    <td>{{ item.product.title }}</td>
+                    <td>
+                        {% if item.product.discount_price %}
+                            ₹{{ item.product.discount_price }}
+                        {% else %}
+                            ₹{{ item.product.price }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="cart-actions">
+                            <a href="{% url 'remove_from_cart' item.product.slug %}">-</a>
+                            {{ item.quantity }}
+                            <a href="{% url 'add_to_cart' item.product.slug %}">+</a>
+                        </div>
+                    </td>
+                    <td>₹{{ item.get_final_price }}</td>
+                    <td>
+                        <a href="{% url 'remove_single_item' item.product.slug %}" style="color: var(--danger-color); font-size: 14px;">Remove</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div class="cart-total">
+            Total: ₹{{ order.get_total }}
+        </div>
+        
+        <div class="cart-buttons">
+            <a href="{% url 'home' %}" class="btn btn-secondary">Continue Shopping</a>
+            <a href="{% url 'checkout' %}" class="btn btn-primary" style="width: 200px;">Proceed to Checkout</a>
+        </div>
+    </div>
+    {% else %}
+        <p style="margin-top: 20px;">Your cart is empty. <a href="{% url 'home' %}">Continue shopping</a></p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Create Account{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2 class="auth-title">Create account</h2>
+    <form class="auth-form" method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Create your Shopper account</button>
+    </form>
+    
+    <div style="margin-top: 20px; font-size: 13px;">
+        <p>Already have an account? <a href="{% url 'login' %}">Sign in</a></p>
+    </div>
+</div>
+
+<style>
+/* Adjust django form p tags to match our style */
+.auth-form p {
+    margin-bottom: 15px;
+}
+.auth-form ul {
+    color: var(--danger-color);
+    font-size: 12px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+.auth-form span.helptext {
+    font-size: 12px;
+    color: #555;
+    display: block;
+    margin-top: 5px;
+}
+</style>
+{% endblock %}

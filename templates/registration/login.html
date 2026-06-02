@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2 class="auth-title">Sign in</h2>
+    <form class="auth-form" method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <p>
+            <label for="id_username">Username</label>
+            <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+        </p>
+        <p>
+            <label for="id_password">Password</label>
+            <input type="password" name="password" autocomplete="current-password" required id="id_password">
+        </p>
+        <button type="submit" class="btn btn-primary">Continue</button>
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+    
+    <div style="margin-top: 20px; text-align: center; font-size: 13px;">
+        <p>New to Shopper?</p>
+        <a href="{% url 'register' %}" class="btn btn-secondary" style="margin-top: 10px;">Create your Shopper account</a>
+    </div>
+</div>
+{% endblock %}
