@@ -1,15 +1,7 @@
 {
-  "buildCommand": "pip install -r requirements.txt",
-  "installCommand": "pip install -r requirements.txt",
-  "env": {
-    "DJANGO_SETTINGS_MODULE": "config.settings"
-  },
-  "functions": {
-    "api/**/*.py": {
-      "runtime": "python3.11"
-    }
-  },
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/api/wsgi" }
-  ]
+  "buildCommand": "pip install -r requirements.txt && echo 'Build complete'",
+  "framework": "django",
+  "python": {
+    "version": "3.11"
+  }
 }
